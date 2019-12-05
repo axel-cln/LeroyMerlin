@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ads>
+    <ad id="1">
+        <title>Développeur java</title>
+        <description>Description java : JEE</description>
+        <tasks>
+            <task>Tâche 1 : prog</task>
+            <task>Tâche 2 : uml</task>
+        </tasks>
+    </ad>
+    <ad id="2">
+        <title>Chef de projet</title>
+        <description>Diriger une équipe</description>
+        <tasks>
+            <task>Tâche 1 : Gérer l'équipe en agile</task>
+        </tasks>
+    </ad>
+</ads>

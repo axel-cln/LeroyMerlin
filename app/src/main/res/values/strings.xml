@@ -3,5 +3,5 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_main">Accueil</string>
     <string name="title_ad">Offres</string>
-    <string name="title_profil">Mon profil</string>
+    <string name="title_profil">Mon panier</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.example.leroymerlin.ui.ad;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.leroymerlin.R;
+import com.example.leroymerlin.utils.XMLManager;
 
 public class AdFragment extends Fragment {
 
@@ -30,6 +32,11 @@ public class AdFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+        Log.e("Leroy", "read xml");
+
+        XMLManager.readFile(getContext(), "ads.xml");
+
         return root;
     }
 }
