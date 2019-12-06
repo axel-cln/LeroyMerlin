@@ -2,6 +2,7 @@ package com.example.leroymerlin.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,11 +48,14 @@ public class PreferencesManager {
         for (Integer id : list){
             stringBuilder.append(id+",");
         }
-        stringBuilder.substring(0, stringBuilder.length()-2);
+        stringBuilder.append(pid);
+
+        Log.e("String", "builder");
+        Log.e("On push : ", stringBuilder.toString());
 
         SharedPreferences settings = contextPref.getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
-        editor.putString("predAds", stringBuilder.toString());
+        editor.putString("prefAds", stringBuilder.toString());
         editor.apply();
     }
 
@@ -61,13 +65,12 @@ public class PreferencesManager {
         for (Integer id : list){
             stringBuilder.append(id+",");
         }
-        stringBuilder.substring(0, stringBuilder.length()-2);
+        stringBuilder.append(pid);
 
         SharedPreferences settings = contextPref.getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("uninAds", stringBuilder.toString());
         editor.apply();
     }
-
 
 }

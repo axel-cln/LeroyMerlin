@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Leroy Merlin</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Leroy Merlin - Recrutements</string>
     <string name="title_main">Accueil</string>
     <string name="title_ad">Offres</string>
     <string name="title_profil">Mon panier</string>
