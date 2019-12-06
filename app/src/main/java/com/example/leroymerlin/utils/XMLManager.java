@@ -64,6 +64,7 @@ public class XMLManager {
 
                 advert.setTitle(title);
                 advert.setDescription(description);
+                advert.setContact(contact);
 
                 NodeList tasks = ((Element)ad.getElementsByTagName("tasks").item(0)).getElementsByTagName("task");
 

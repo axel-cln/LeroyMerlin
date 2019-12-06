@@ -51,14 +51,12 @@ public class AdFragment extends Fragment {
         //On garde que les offres non vues
         Iterator<Ad> it = adList.iterator();
 
-        Log.e("avant", adList.size()+"");
         while (it.hasNext()){
             Ad ad = it.next();
             if (PreferencesManager.getAllPrefAds().contains(ad.getId()) || PreferencesManager.getAllUninterestingAds().contains(ad.getId())){
                 it.remove();
             }
         }
-        Log.e("après it", adList.size()+"");
 
         this.clickable = true;
 

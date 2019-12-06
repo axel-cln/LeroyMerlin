@@ -7,6 +7,9 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * S'occupe des péférences de l'utilisateur sur le choix des offres.
+ */
 public class PreferencesManager {
 
     public static final String PREFS_NAME = "Leroy Merlin";
@@ -23,7 +26,9 @@ public class PreferencesManager {
         if (settings.contains("prefAds")){
             String[] prefAds = settings.getString("prefAds", "").split(",");
             for (String pref : prefAds){
-                list.add(Integer.parseInt(pref));
+                if (!pref.isEmpty()){
+                    list.add(Integer.parseInt(pref));
+                }
             }
         }
         return list;
