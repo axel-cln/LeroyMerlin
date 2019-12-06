@@ -1,18 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ads>
     <ad id="1">
-        <title>Développeur java</title>
-        <description>Description java : JEE</description>
+        <title>Manager Cloud &amp; Connectivity</title>
+        <description>Le Domain Leader à la responsabilité de :
+            - Ecrire la trajectoire de transformation Cloud &amp; connectivity avec les équipes,
+            - Porter pour l’ensemble de la Digital Data Factory la stratégie de transformation cloud public,
+            - Accompagner l’acculturation et la mise en œuvre de cette stratégie.</description>
         <tasks>
-            <task>Tâche 1 : prog</task>
-            <task>Tâche 2 : uml</task>
+            <task>L’accompagnement du développement de chaque collaborateur (autonomisation, responsabilisation)</task>
+            <task>La définition et le pilotage des budgets avec les leaders de squads.</task>
+            <task>Le développement des transversalités et partenariats avec les éditeurs, intégrateurs, ...</task>
+            <task>Une forte contribution à la communauté « Groupe Adeo » sur ces sujets</task>
         </tasks>
     </ad>
     <ad id="2">
-        <title>Chef de projet</title>
-        <description>Diriger une équipe</description>
+        <title>Tech lead Java</title>
+        <description>L’équipe « Commande Client Omnicanale » prend en charge la conception, le développement et la maintenance des applications Front End &amp; Back End permettant à nos clients et nos collaborateurs de vendre et suivre les commandes clients.</description>
         <tasks>
-            <task>Tâche 1 : Gérer l'équipe en agile</task>
+            <task>Expert, tu es garant des bonnes pratiques de développement</task>
+            <task>Facilitateur, tu as le sens du service et aide à la résolution des problématiques.</task>
+            <task>Formateur et coach, tu transmets de nouveaux savoirs aux équipes</task>
+            <task>Passionné, tu réalises de la veille technologique</task>
+        </tasks>
+    </ad>
+    <ad id="3">
+        <title>Chef de projet “Applications Mobile”</title>
+        <description>L’équipe Colibri développe des applications mobiles Android à destination des collaborateurs en magasin pour les 8 business Unit du groupe Adeo situées dans différents pays.</description>
+        <tasks>
+            <task>Tu as la responsabilité de stabiliser, fiabiliser nos applis/systèmes et améliorer les performances sur toute la chaine de valeur (du front au back-end)</task>
+            <task>Tu dois mesurer la qualité du service rendu pour les utilisateurs en termes de performance technique, de fiabilité et mettre ces mesures en regard des attentes business</task>
+            <task>Tu dois contribuer à l’amélioration de la qualité du Build des 3 squads pour diminuer les problèmes en Run</task>
+        </tasks>
+    </ad>
+    <ad id="4">
+        <title>Architecte Data – Equipe Data</title>
+        <description>En s’appuyant sur des organisations disruptives, des méthodes agiles et user centric, des innovations technologiques ainsi que des Hommes audacieux, la Digital &amp; Data Factory de Leroy Merlin se doit de porter et d’accompagner l’ensemble des collaborateurs dans sa transformation digitale et omnicanale.</description>
+        <tasks>
+            <task>Tu modéliseras des socles de données interconnectées, évolutifs et répondant aux exigences actuelles et aux futurs besoins des utilisateurs.</task>
+            <task>Tu travailleras au sein d’une squad, en collaboration avec des TechLead. Définir les composants techniques sur la plateforme Google Cloud en phase avec les usages des utilisateurs, assurer une cohérence globale et élaborer la roadmap de ces composants.</task>
+            <task>Tu partageras avec les autres architectes au sein d’une guilde, ainsi que l’évangélisation des principes d’architecture.</task>
+        </tasks>
+    </ad>
+    <ad id="5">
+        <title>Tech lead Java</title>
+        <description>La plateforme des services a été créée en juillet afin accompagner les habitants dans tous leurs projets, leur faire vivre des expériences exceptionnelles grâce à la fluidité de leur parcours on line et off line, à la personnalisation des solutions et à la qualité des services rendus.</description>
+        <tasks>
+            <task>Expert, tu es garant des bonnes pratiques de développement</task>
+            <task>Tu es le relais des architectes d’entreprise au sein de ta feature team</task>
+            <task>Facilitateur, tu as le sens du service et aide à la résolution des problématiques</task>
+            <task>Formateur et coach, tu transmets de nouveaux savoirs aux équipes</task>
+            <task>Passionné, tu réalises de la veille technologique</task>
+        </tasks>
+    </ad>
+    <ad id="6">
+        <title>Manager Digital</title>
+        <description>L’entreprise a opéré un pivot passant de distributeurs de produits à distributeurs de solutions (Produits + Services) et la Plateforme des services a été créée en juillet 2018 pour répondre aux enjeux business et digitaux sur ce terrain.</description>
+        <tasks>
+            <task>Faire grandir l’équipe et chacun de ses membres,</task>
+            <task>Ancrer les méthodes agiles dans le collectif,</task>
+            <task>Booster l’innovation digitale,</task>
+            <task>Gérer le portefeuille projet sur ton domaine</task>
         </tasks>
     </ad>
 </ads>

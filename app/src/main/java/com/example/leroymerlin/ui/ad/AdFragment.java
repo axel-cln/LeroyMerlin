@@ -18,12 +18,17 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.leroymerlin.R;
+import com.example.leroymerlin.models.Ad;
 import com.example.leroymerlin.utils.XMLManager;
+
+import java.util.Collections;
+import java.util.List;
 
 public class AdFragment extends Fragment {
 
     private AdViewModel homeViewModel;
     private ConstraintLayout constraintLayout;
+    private List<Ad> adList;
 
     private boolean clickable;
 
@@ -33,21 +38,37 @@ public class AdFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_ad, container, false);
         constraintLayout = root.findViewById(R.id.constraintLayout);
 
-        clickable = true;
+        this.adList = XMLManager.readFile(getContext(), "ads.xml");
+        this.clickable = true;
 
-        XMLManager.readFile(getContext(), "ads.xml");
         createCard();
-
-
         return root;
     }
 
     //Créer une carte d'offre
     private void createCard(){
-
         //On crééé la carte
         final View card = LayoutInflater.from(getActivity()).inflate(R.layout.ad_card, constraintLayout, false);
+        TextView titleAdTV = card.findViewById(R.id.titleAdTV);
+        TextView descAdTV = card.findViewById(R.id.descAdTV);
+        TextView tasksAdTV = card.findViewById(R.id.tasksAdTV);
         constraintLayout.addView(card);
+
+        //On modifie les propriétés de l'offre
+        Collections.shuffle(adList);
+        if (adList.size() != 0){
+            Log.e("yes", "yes");
+            Ad ad = adList.get(0);
+            titleAdTV.setText(ad.getTitle());
+            descAdTV.setText(ad.getDescription());
+
+            StringBuilder stringBuilder = new StringBuilder();
+            for (String task : ad.getTasks()){
+                stringBuilder.append("- ").append(task).append("\n");
+            }
+            tasksAdTV.setText(stringBuilder);
+        }
+
         card.setScaleX(0.7f);
         card.setScaleY(0.7f);
         card.animate().scaleX(1f).scaleY(1f).setDuration(400);

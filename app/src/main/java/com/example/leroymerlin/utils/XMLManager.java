@@ -67,8 +67,15 @@ public class XMLManager {
                 NodeList tasks = ((Element)ad.getElementsByTagName("tasks").item(0)).getElementsByTagName("task");
 
                 for (int j=0; j< tasks.getLength(); j++){
+                    Log.e("node", "1");
                     String taskText = tasks.item(j).getTextContent();
+                    Log.e("node", "2");
+                    if (taskText == null){
+                        Log.e("task", "null");
+                    }
                     advert.addTask(taskText);
+                    Log.e("node", "3");
+
                 }
 
                 listAds.add(advert);
@@ -79,6 +86,7 @@ public class XMLManager {
             e.printStackTrace();
         }
 
+        Log.e("return", "ok");
         return listAds;
     }
 }

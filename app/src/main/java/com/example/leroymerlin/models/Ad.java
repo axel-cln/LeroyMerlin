@@ -1,5 +1,6 @@
 package com.example.leroymerlin.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Ad {
@@ -10,6 +11,11 @@ public class Ad {
 
     public Ad(int id){
         this.id = id;
+        this.tasks = new ArrayList<>();
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTitle() {
