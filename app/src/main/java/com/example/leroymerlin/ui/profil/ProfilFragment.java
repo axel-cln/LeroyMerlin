@@ -1,9 +1,11 @@
 package com.example.leroymerlin.ui.profil;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -80,10 +83,15 @@ public class ProfilFragment extends Fragment {
 
             // On crée le premier linearLayout qui contient les infos principales
             final LinearLayout linearLayoutAdPrincipal = new LinearLayout(getContext());
-            linearLayoutAdPrincipal.setPadding(40,20,40,30);
+            linearLayoutAdPrincipal.setPadding(40,0,40,30);
             linearLayoutAdPrincipal.setOrientation(LinearLayout.VERTICAL);
             linearLayoutAdPrincipal.setBackgroundResource(R.drawable.style_ad_saved_part1);
             linearLayoutScrollViewAd.addView(linearLayoutAdPrincipal);
+
+            // création d'un relativeLayout qui contient le nom de l'offre et une image pour supprimer l'offre de son panier
+            RelativeLayout relativeLayoutNameAd = new RelativeLayout(getContext());
+            linearLayoutAdPrincipal.addView(relativeLayoutNameAd);
+
 
             // on y ajoute les informations principales
             TextView nameAd = new TextView(getContext());
@@ -93,7 +101,15 @@ public class ProfilFragment extends Fragment {
             nameAd.setText("Engineer BI - STAGE");
             nameAd.setTextSize(convertSpToPixel(10));
             Log.i("Engineer BI - STAGE", nameAd.getText().toString());
-            linearLayoutAdPrincipal.addView(nameAd);
+            relativeLayoutNameAd.addView(nameAd);
+
+            ImageView removeAdd = new ImageView(getContext());
+            removeAdd.setImageResource(R.drawable.ic_cross_black);
+            RelativeLayout.LayoutParams layoutImageRemove = new RelativeLayout.LayoutParams((int)convertDpToPixel(20), (int)convertDpToPixel(20));
+            removeAdd.setLayoutParams(layoutImageRemove);
+            layoutImageRemove.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            //layoutImageRemove.setMargins(0,);
+            relativeLayoutNameAd.addView(removeAdd);
 
             TextView textViewMission = new TextView(getContext());
             textViewMission.setTextColor(getResources().getColor(R.color.colorTextWhite));
@@ -125,7 +141,7 @@ public class ProfilFragment extends Fragment {
             linearLayoutAdSecondary.setPadding(25,0,25,0);
             linearLayoutAdSecondary.setBackgroundResource(R.drawable.style_ad_saved_part2);
             linearLayoutAdSecondary.setOrientation(LinearLayout.VERTICAL);
-            LinearLayout.LayoutParams linearLayoutPart2Params = new LinearLayout.LayoutParams(linearLayoutAdPrincipal.getWidth() - 100, ViewGroup.LayoutParams.MATCH_PARENT);
+            LinearLayout.LayoutParams linearLayoutPart2Params = new LinearLayout.LayoutParams(linearLayoutAdPrincipal.getWidth() - 30, ViewGroup.LayoutParams.MATCH_PARENT);
             linearLayoutAdSecondary.setLayoutParams(linearLayoutPart2Params);
             linearLayoutScrollViewAd.addView(linearLayoutAdSecondary);
             final TextView description = new TextView(getContext());
@@ -190,7 +206,7 @@ public class ProfilFragment extends Fragment {
         LinearLayout.LayoutParams scrollViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, linearHeight);
         scrollViewParams.setMargins(0, 30, 0, 0);
         scrollView.setLayoutParams(scrollViewParams);
-        LinearLayout.LayoutParams linearLayoutPart2Params = new LinearLayout.LayoutParams(linearLayoutP.getWidth() - 100, ViewGroup.LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams linearLayoutPart2Params = new LinearLayout.LayoutParams(linearLayoutP.getWidth() - 30, ViewGroup.LayoutParams.MATCH_PARENT);
         linearLayoutPart2Params.weight = 1;
         linearLayoutPart2Params.gravity = Gravity.CENTER_HORIZONTAL;
         linearLayoutS.setLayoutParams(linearLayoutPart2Params);
@@ -261,5 +277,9 @@ public class ProfilFragment extends Fragment {
 
     public float convertSpToPixel(float sp){
         return sp * getResources().getDisplayMetrics().scaledDensity;
+    }
+
+    public float convertDpToPixel(float dp){
+        return dp * ((float) getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 }
