@@ -18,10 +18,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.leroymerlin.R;
 import com.example.leroymerlin.models.Ad;
+import com.example.leroymerlin.utils.PreferencesManager;
 import com.example.leroymerlin.utils.XMLManager;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.prefs.Preferences;
 
 public class AdFragment extends Fragment {
 
@@ -30,6 +33,7 @@ public class AdFragment extends Fragment {
     private List<Ad> adList;
     private View card, lastCard;
     private boolean clickable;
+    private Ad currentAd;
 
     private GestureDetector gestureDetector;
     View.OnTouchListener gestureListener;
@@ -42,7 +46,19 @@ public class AdFragment extends Fragment {
         scrolAdView = root.findViewById(R.id.scrolAdView);
         card = null;
 
+        PreferencesManager.setContext(getContext());
+
         this.adList = XMLManager.readFile(getContext(), "ads.xml");
+        //On garde que les offres non vues
+        Iterator<Ad> it = adList.iterator();
+
+        while (it.hasNext()){
+            Ad ad = it.next();
+            if (PreferencesManager.getAllPrefAds().contains(ad.getId()) || PreferencesManager.getAllUninterestingAds().contains(ad.getId())){
+                it.remove();
+            }
+        }
+
         this.clickable = true;
 
         final GestureDetector gesture = new GestureDetector(getActivity(),
@@ -100,6 +116,9 @@ public class AdFragment extends Fragment {
                 stringBuilder.append("- ").append(task).append("\n");
             }
             tasksAdTV.setText(stringBuilder);
+
+            this.currentAd = ad;
+            this.adList.remove(ad);
         }
 
         //Préparation de la transition
@@ -130,6 +149,8 @@ public class AdFragment extends Fragment {
     private void removeAd(){
         if (clickable){
             clickable = false;
+            PreferencesManager.addUninterestedAd(currentAd.getId());
+            adList.remove(currentAd);
             this.card.animate().rotation(-25).translationX(-250).alpha(0).setDuration(500).setListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animation) {
@@ -162,6 +183,8 @@ public class AdFragment extends Fragment {
     private void likeAd(){
         if (clickable){
             clickable = false;
+            PreferencesManager.addPrefAd(currentAd.getId());
+            adList.remove(currentAd);
             this.card.animate().rotation(25).translationX(250).alpha(0).setDuration(500).setListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animation) {
