@@ -107,6 +107,7 @@ public class ProfilFragment extends Fragment {
             //nameAdParams.setMargins();
             nameAd.setTextColor(getResources().getColor(R.color.colorTextWhite));
             nameAd.setText(listAds.get(i).getTitle());
+            nameAd.setTypeface(nameAd.getTypeface(), Typeface.BOLD);
             nameAd.setTextSize(convertSpToPixel(10));
             relativeLayoutNameAd.addView(nameAd);
 
@@ -125,12 +126,12 @@ public class ProfilFragment extends Fragment {
                 }
             });
 
-            TextView textViewMission = new TextView(getContext());
-            textViewMission.setTextColor(getResources().getColor(R.color.colorTextWhite));
-            textViewMission.setText("Mission");
-            textViewMission.setTextSize(convertSpToPixel(7));
-            textViewMission.setTypeface(textViewMission.getTypeface(), Typeface.BOLD);
-            linearLayoutAdPrincipal.addView(textViewMission);
+            TextView textViewDescription = new TextView(getContext());
+            textViewDescription.setTextColor(getResources().getColor(R.color.colorTextWhite));
+            textViewDescription.setText("Description");
+            textViewDescription.setTextSize(convertSpToPixel(7));
+            textViewDescription.setTypeface(textViewDescription.getTypeface(), Typeface.BOLD);
+            linearLayoutAdPrincipal.addView(textViewDescription);
 
             TextView missionsAd = new TextView(getContext());
             missionsAd.setTextColor(getResources().getColor(R.color.colorTextWhite));
@@ -157,7 +158,7 @@ public class ProfilFragment extends Fragment {
 
             TextView textViewTasks = new TextView(getContext());
             textViewTasks.setTextColor(getResources().getColor(R.color.colorTextWhite));
-            textViewTasks.setText("Tâches à affectuer ");
+            textViewTasks.setText("Missions à affectuer ");
             textViewTasks.setPadding(0,10,0,0);
             textViewTasks.setTextSize(convertSpToPixel(6));
             textViewTasks.setTypeface(textViewTasks.getTypeface(), Typeface.BOLD);

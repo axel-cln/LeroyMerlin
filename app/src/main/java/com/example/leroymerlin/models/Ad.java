@@ -8,6 +8,7 @@ public class Ad {
     private String title;
     private String description;
     private List<String> tasks;
+    private String contact;
 
     public Ad(int id){
         this.id = id;
@@ -40,5 +41,13 @@ public class Ad {
 
     public void addTask(String task) {
         this.tasks.add(task);
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }
