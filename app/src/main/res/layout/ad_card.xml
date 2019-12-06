@@ -9,6 +9,7 @@
     android:background="@drawable/style_ad_card">
 
     <ScrollView
+        android:id="@+id/scrolAdView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/lovePart"
