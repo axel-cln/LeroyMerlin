@@ -69,6 +69,7 @@ public class XMLManager {
                 for (int j=0; j< tasks.getLength(); j++){
                     String taskText = tasks.item(j).getTextContent();
                     advert.addTask(taskText);
+
                 }
 
                 listAds.add(advert);
@@ -78,7 +79,6 @@ public class XMLManager {
             Log.e("erreur", "impossible");
             e.printStackTrace();
         }
-
         return listAds;
     }
 }
