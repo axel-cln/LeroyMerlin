@@ -53,6 +53,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="7dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
@@ -82,6 +83,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="7dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
@@ -130,7 +132,7 @@
                         android:autoSizeTextType="uniform"
                         android:gravity="center"
                         android:maxLines="1"
-                        android:text="recrutements"
+                        android:text="recrutements/an"
                         android:textColor="@color/colorText"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -147,14 +149,50 @@
                 android:layout_marginRight="@dimen/margin_home"
                 android:layout_weight="1"
                 android:background="@color/colorPrimary"
+                android:maxLines="1"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:maxLines="1"
-                android:textAllCaps="false"
                 android:text="Devenez notre 23 001e collaborateur"
+                android:textAllCaps="false"
                 android:textColor="@color/colorTextWhite"
                 android:textSize="18sp"
-                app:autoSizeTextType="uniform"/>
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_home"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="@dimen/margin_home"
+                android:gravity="center"
+                android:text="Qui sommes-nous ?"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <VideoView
+                android:id="@+id/videoView"
+                android:layout_width="match_parent"
+                android:layout_height="175dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:layout_marginLeft="@dimen/margin_home"
+                android:layout_marginRight="@dimen/margin_home"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_home"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="@dimen/margin_home"
+                android:gravity="center"
+                android:text="Petit texte des mifas ici"
+                android:textColor="@color/colorText"
+                android:textSize="30sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
