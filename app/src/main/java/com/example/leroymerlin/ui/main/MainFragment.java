@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -26,6 +27,7 @@ public class MainFragment extends Fragment {
 
     private Button becomeAssociateBtn;
     private VideoView videoView;
+    private ImageView logo;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class MainFragment extends Fragment {
 
         becomeAssociateBtn = root.findViewById(R.id.becomeAssociateBtn);
         videoView = root.findViewById(R.id.videoView);
+        logo = root.findViewById(R.id.logo);
 
         //Préparer la vidéo
         MediaController mediaController = new MediaController(getContext());
@@ -64,6 +67,10 @@ public class MainFragment extends Fragment {
                 ((MainActivity)getActivity()).loadFragment();
             }
         });
+
+        logo.setY(logo.getY()-25);
+        logo.setAlpha(0f);
+        logo.animate().translationY(25).setDuration(900).alpha(1);
         return root;
     }
 

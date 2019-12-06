@@ -7,6 +7,9 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * S'occupe des péférences de l'utilisateur sur le choix des offres.
+ */
 public class PreferencesManager {
 
     public static final String PREFS_NAME = "Leroy Merlin";
@@ -19,26 +22,34 @@ public class PreferencesManager {
     public static List<Integer> getAllPrefAds(){
         List<Integer> list = new ArrayList<>();
 
-        SharedPreferences settings = contextPref.getSharedPreferences(PREFS_NAME, 0);
-        if (settings.contains("prefAds")){
-            String[] prefAds = settings.getString("prefAds", "").split(",");
-            for (String pref : prefAds){
-                list.add(Integer.parseInt(pref));
+        if (contextPref != null){
+            SharedPreferences settings = contextPref.getSharedPreferences(PREFS_NAME, 0);
+            if (settings.contains("prefAds")){
+                String[] prefAds = settings.getString("prefAds", "").split(",");
+                for (String pref : prefAds){
+                    if (!pref.isEmpty()){
+                        list.add(Integer.parseInt(pref));
+                    }
+                }
             }
         }
+
         return list;
     }
 
     public static List<Integer> getAllUninterestingAds(){
         List<Integer> list = new ArrayList<>();
 
-        SharedPreferences settings = contextPref.getSharedPreferences(PREFS_NAME, 0);
-        if (settings.contains("uninAds")){
-            String[] uninAds = settings.getString("uninAds", "").split(",");
-            for (String unin : uninAds){
-                list.add(Integer.parseInt(unin));
+        if (contextPref != null){
+            SharedPreferences settings = contextPref.getSharedPreferences(PREFS_NAME, 0);
+            if (settings.contains("uninAds")){
+                String[] uninAds = settings.getString("uninAds", "").split(",");
+                for (String unin : uninAds){
+                    list.add(Integer.parseInt(unin));
+                }
             }
         }
+
         return list;
     }
 
@@ -49,9 +60,6 @@ public class PreferencesManager {
             stringBuilder.append(id+",");
         }
         stringBuilder.append(pid);
-
-        Log.e("String", "builder");
-        Log.e("On push : ", stringBuilder.toString());
 
         SharedPreferences settings = contextPref.getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
@@ -73,4 +81,18 @@ public class PreferencesManager {
         editor.apply();
     }
 
+    public static void removePrefAd(int pid){
+        List<Integer> list = getAllPrefAds();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Integer id : list){
+            if (id != pid){
+                stringBuilder.append(id+",");
+            }
+        }
+
+        SharedPreferences settings = contextPref.getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("prefAds", stringBuilder.toString());
+        editor.apply();
+    }
 }

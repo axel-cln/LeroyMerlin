@@ -24,7 +24,6 @@ import com.example.leroymerlin.utils.XMLManager;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.prefs.Preferences;
 
 public class AdFragment extends Fragment {
 
@@ -32,11 +31,9 @@ public class AdFragment extends Fragment {
     private ScrollView scrolAdView;
     private List<Ad> adList;
     private View card, lastCard;
+    private TextView errorTV;
     private boolean clickable;
     private Ad currentAd;
-
-    private GestureDetector gestureDetector;
-    View.OnTouchListener gestureListener;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +41,8 @@ public class AdFragment extends Fragment {
         //Mouvement horizontal
         constraintLayout = root.findViewById(R.id.constraintLayout);
         scrolAdView = root.findViewById(R.id.scrolAdView);
+        errorTV = root.findViewById(R.id.errorTV);
+        errorTV.setVisibility(View.GONE);
         card = null;
 
         PreferencesManager.setContext(getContext());
@@ -102,9 +101,17 @@ public class AdFragment extends Fragment {
         TextView titleAdTV = this.card.findViewById(R.id.titleAdTV);
         TextView descAdTV = this.card.findViewById(R.id.descAdTV);
         TextView tasksAdTV = this.card.findViewById(R.id.tasksAdTV);
-        constraintLayout.addView(this.card);
 
-        //On modifie les propriétés de l'offre+-
+        Log.e("creer card", adList.size()+"");
+        if (!adList.isEmpty()){
+            constraintLayout.addView(this.card);
+            errorTV.setVisibility(View.GONE);
+        }
+        else{
+            errorTV.setVisibility(View.VISIBLE);
+        }
+
+        //On modifie les propriétés de l'offre
         Collections.shuffle(adList);
         if (adList.size() != 0){
             Ad ad = adList.get(0);
@@ -149,8 +156,11 @@ public class AdFragment extends Fragment {
     private void removeAd(){
         if (clickable){
             clickable = false;
-            PreferencesManager.addUninterestedAd(currentAd.getId());
-            adList.remove(currentAd);
+            if (currentAd != null){
+                PreferencesManager.addUninterestedAd(currentAd.getId());
+                adList.remove(currentAd);
+            }
+
             this.card.animate().rotation(-25).translationX(-250).alpha(0).setDuration(500).setListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animation) {
@@ -183,8 +193,11 @@ public class AdFragment extends Fragment {
     private void likeAd(){
         if (clickable){
             clickable = false;
-            PreferencesManager.addPrefAd(currentAd.getId());
-            adList.remove(currentAd);
+            if (currentAd != null) {
+                PreferencesManager.addPrefAd(currentAd.getId());
+                adList.remove(currentAd);
+            }
+
             this.card.animate().rotation(25).translationX(250).alpha(0).setDuration(500).setListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animation) {
