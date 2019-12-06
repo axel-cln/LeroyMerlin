@@ -82,7 +82,7 @@ public class ProfilFragment extends Fragment {
             final LinearLayout linearLayoutAdPrincipal = new LinearLayout(getContext());
             linearLayoutAdPrincipal.setPadding(40,20,40,30);
             linearLayoutAdPrincipal.setOrientation(LinearLayout.VERTICAL);
-            linearLayoutAdPrincipal.setBackgroundResource(R.color.colorPrimary);
+            linearLayoutAdPrincipal.setBackgroundResource(R.drawable.style_ad_saved_part1);
             linearLayoutScrollViewAd.addView(linearLayoutAdPrincipal);
 
             // on y ajoute les informations principales
@@ -123,8 +123,10 @@ public class ProfilFragment extends Fragment {
             // On crée le second linearLayout qui contient les infos complémentaires
             final LinearLayout linearLayoutAdSecondary = new LinearLayout(getActivity());
             linearLayoutAdSecondary.setPadding(25,0,25,0);
-            linearLayoutAdSecondary.setBackgroundResource(R.color.colorPrimaryDark);
+            linearLayoutAdSecondary.setBackgroundResource(R.drawable.style_ad_saved_part2);
             linearLayoutAdSecondary.setOrientation(LinearLayout.VERTICAL);
+            LinearLayout.LayoutParams linearLayoutPart2Params = new LinearLayout.LayoutParams(linearLayoutAdPrincipal.getWidth() - 100, ViewGroup.LayoutParams.MATCH_PARENT);
+            linearLayoutAdSecondary.setLayoutParams(linearLayoutPart2Params);
             linearLayoutScrollViewAd.addView(linearLayoutAdSecondary);
             final TextView description = new TextView(getContext());
             description.setTextColor(getResources().getColor(R.color.colorTextWhite));
@@ -149,42 +151,7 @@ public class ProfilFragment extends Fragment {
                         seeInformations = false;
                         // si les informations complémentaires de l'offre cliquée ne sont pas visibles actuellement
                         if (linearLayoutAdSecondary.getVisibility() == View.GONE) {
-                            final int linearHeight = scrollViewAd.getHeight();
-                            LinearLayout.LayoutParams scrollViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, linearHeight);
-                            scrollViewParams.setMargins(0, 30, 0, 0);
-                            scrollViewAd.setLayoutParams(scrollViewParams);
-                            linearLayoutAdSecondary.setVisibility(View.VISIBLE);
-                            linearLayoutAdSecondary.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    int maxSizeInformations = linearLayoutAdSecondary.getHeight();
-                                    Log.i("Taille MAXIMALE", "" + maxSizeInformations);
-                                    //LinearLayout.LayoutParams scrollViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
-                                    //linearLayoutAdSecondary.setLayoutParams(scrollViewParams);
-                                    for (int i = 0; i < maxSizeInformations; i++) {
-                                        Handler handler = new Handler();
-                                        final int finalI = i;
-                                        handler.postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                //Log.i("Taille", finalI +"");
-                                                LinearLayout.LayoutParams scrollViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, linearHeight + finalI);
-                                                scrollViewParams.setMargins(0, 30, 0, 0);
-                                                scrollViewAd.setLayoutParams(scrollViewParams);
-                                            }
-                                        }, (i) / 2);
-                                    }
-                                    Handler handler = new Handler();
-                                    handler.postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            seeInformations = true;
-                                        }
-                                    }, (maxSizeInformations+1) / 2);
-                                }
-                            });
-                            imageViewMore.setRotation(180);
-
+                            openLinearInformation(scrollViewAd, linearLayoutAdPrincipal, linearLayoutAdSecondary, imageViewMore);
                             if (null != linearLayoutOpen) {
                                 closeLinearInformations(scrollViewOpen, linearLayoutOpen, imageViewRotated);
                                 //imageViewRotated.setRotation(0);
@@ -194,35 +161,8 @@ public class ProfilFragment extends Fragment {
                             imageViewRotated = imageViewMore;
                             linearLayoutOpen = linearLayoutAdSecondary;
                         } else {
-                            final int linearHeight = scrollViewAd.getHeight();
-                            Log.i("Test taille linear", linearHeight + "");
+                            closeLinearInformations(scrollViewAd, linearLayoutAdSecondary, imageViewMore);
 
-                            final int maxSizeInformations = linearLayoutAdSecondary.getHeight();
-                            Log.i("Taille MAXIMALE", "" + maxSizeInformations);
-                            //LinearLayout.LayoutParams scrollViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
-                            //linearLayoutAdSecondary.setLayoutParams(scrollViewParams);
-                            for (int i = maxSizeInformations; i > 0; i--) {
-                                Handler handler = new Handler();
-                                final int finalI = i;
-                                handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        LinearLayout.LayoutParams scrollViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, linearHeight - maxSizeInformations + finalI);
-                                        scrollViewParams.setMargins(0, 30, 0, 0);
-                                        scrollViewAd.setLayoutParams(scrollViewParams);
-                                    }
-                                }, (maxSizeInformations - i) / 2);
-                            }
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    linearLayoutAdSecondary.setVisibility(View.GONE);
-                                    seeInformations = true;
-                                }
-                            }, (maxSizeInformations + 1) / 2);
-
-                            imageViewMore.setRotation(0);
                             imageViewRotated = null;
                             linearLayoutOpen = null;
                         }
@@ -234,6 +174,7 @@ public class ProfilFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     if (seeInformations) {
+                        seeInformations = false;
                         closeLinearInformations(scrollViewAd, linearLayoutAdSecondary, imageViewMore);
                         imageViewRotated = null;
                         linearLayoutOpen = null;
@@ -243,6 +184,50 @@ public class ProfilFragment extends Fragment {
         }
     }
 
+    // on affiche les informations supplémentaires à l'utilisateur
+    private void openLinearInformation(final ScrollView scrollView, LinearLayout linearLayoutP, final LinearLayout linearLayoutS, ImageView imageView) {
+        final int linearHeight = scrollView.getHeight();
+        LinearLayout.LayoutParams scrollViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, linearHeight);
+        scrollViewParams.setMargins(0, 30, 0, 0);
+        scrollView.setLayoutParams(scrollViewParams);
+        LinearLayout.LayoutParams linearLayoutPart2Params = new LinearLayout.LayoutParams(linearLayoutP.getWidth() - 100, ViewGroup.LayoutParams.MATCH_PARENT);
+        linearLayoutPart2Params.weight = 1;
+        linearLayoutPart2Params.gravity = Gravity.CENTER_HORIZONTAL;
+        linearLayoutS.setLayoutParams(linearLayoutPart2Params);
+        linearLayoutS.setVisibility(View.VISIBLE);
+        linearLayoutS.post(new Runnable() {
+            @Override
+            public void run() {
+                int maxSizeInformations = linearLayoutS.getHeight();
+                Log.i("Taille MAXIMALE", "" + maxSizeInformations);
+                //LinearLayout.LayoutParams scrollViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
+                //linearLayoutAdSecondary.setLayoutParams(scrollViewParams);
+                for (int i = 0; i < maxSizeInformations; i++) {
+                    Handler handler = new Handler();
+                    final int finalI = i;
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            //Log.i("Taille", finalI +"");
+                            LinearLayout.LayoutParams scrollViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, linearHeight + finalI);
+                            scrollViewParams.setMargins(0, 30, 0, 0);
+                            scrollView.setLayoutParams(scrollViewParams);
+                        }
+                    }, (i) / 2);
+                }
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        seeInformations = true;
+                    }
+                }, (maxSizeInformations+1) / 2);
+            }
+        });
+        imageView.setRotation(180);
+    }
+
+    // on masque les informations supplémentaires à l'utilisateur
     private void closeLinearInformations(final ScrollView scrollView, final LinearLayout linearLayout, ImageView imageView) {
         final int linearHeight = scrollView.getHeight();
         Log.i("Test taille linear", linearHeight +"");
@@ -270,7 +255,7 @@ public class ProfilFragment extends Fragment {
                 linearLayout.setVisibility(View.GONE);
                 seeInformations = true;
             }
-        }, (maxSizeInformations +1)/2);
+        }, (maxSizeInformations + 2)/2);
         imageView.setRotation(0);
     }
 
