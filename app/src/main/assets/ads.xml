@@ -12,6 +12,7 @@
             <task>Le développement des transversalités et partenariats avec les éditeurs, intégrateurs, ...</task>
             <task>Une forte contribution à la communauté « Groupe Adeo » sur ces sujets</task>
         </tasks>
+        <contact>Plus d'informations sur notre site internet : https://www.recrute.leroymerlin.fr/</contact>
     </ad>
     <ad id="2">
         <title>Tech lead Java</title>
@@ -22,6 +23,7 @@
             <task>Formateur et coach, tu transmets de nouveaux savoirs aux équipes</task>
             <task>Passionné, tu réalises de la veille technologique</task>
         </tasks>
+        <contact>Plus d'informations sur notre site internet : https://www.recrute.leroymerlin.fr/</contact>
     </ad>
     <ad id="3">
         <title>Chef de projet “Applications Mobile”</title>
@@ -31,6 +33,7 @@
             <task>Tu dois mesurer la qualité du service rendu pour les utilisateurs en termes de performance technique, de fiabilité et mettre ces mesures en regard des attentes business</task>
             <task>Tu dois contribuer à l’amélioration de la qualité du Build des 3 squads pour diminuer les problèmes en Run</task>
         </tasks>
+        <contact>Plus d'informations sur notre site internet : https://www.recrute.leroymerlin.fr/</contact>
     </ad>
     <ad id="4">
         <title>Architecte Data – Equipe Data</title>
@@ -40,6 +43,7 @@
             <task>Tu travailleras au sein d’une squad, en collaboration avec des TechLead. Définir les composants techniques sur la plateforme Google Cloud en phase avec les usages des utilisateurs, assurer une cohérence globale et élaborer la roadmap de ces composants.</task>
             <task>Tu partageras avec les autres architectes au sein d’une guilde, ainsi que l’évangélisation des principes d’architecture.</task>
         </tasks>
+        <contact>Plus d'informations sur notre site internet : https://www.recrute.leroymerlin.fr/</contact>
     </ad>
     <ad id="5">
         <title>Tech lead Java</title>
@@ -51,6 +55,7 @@
             <task>Formateur et coach, tu transmets de nouveaux savoirs aux équipes</task>
             <task>Passionné, tu réalises de la veille technologique</task>
         </tasks>
+        <contact>Plus d'informations sur notre site internet : https://www.recrute.leroymerlin.fr/</contact>
     </ad>
     <ad id="6">
         <title>Manager Digital</title>
@@ -61,5 +66,30 @@
             <task>Booster l’innovation digitale,</task>
             <task>Gérer le portefeuille projet sur ton domaine</task>
         </tasks>
+        <contact>Plus d'informations sur notre site internet : https://www.recrute.leroymerlin.fr/</contact>
+    </ad>
+    <ad id="7">
+        <title>[Stage] Engineer Bi</title>
+        <description>Participation à l’alimentation et à l’exploitation de la Data Platform.</description>
+        <tasks>
+            <task>Tu travailles au contact des équipes métiers ;</task>
+            <task>Tu proposes des solutions techniques innovantes ; </task>
+            <task>Tu modélises et construis le socle Data ; </task>
+            <task>Tu conçois et construis les solutions de restitutions. </task>
+        </tasks>
+        <contact>michael.kusper@leroymerlin.fr</contact>
+    </ad>
+    <ad id="8">
+        <title>[Stage] Assistant chef de projet</title>
+        <description>Au sein de l'équipe Supply IT, nous déployons diverses applications autour de l’entrepôt et du transport. Pour documenter et accompagner le passage au RUN de ces applications, nous recherchons un assistant chef de projet.</description>
+        <tasks>
+            <task>Tu travailles au côté des équipes projet IT et RUN ; </task>
+            <task>Tu développeras des extractions vers les autres produits de l’écosystème Leroy Merlin ; </task>
+            <task>Tu participeras aux chantiers techniques de supervision, automatisation des déploiements et plan de production ; </task>
+            <task>Tu seras chargé(e) de documenter et de vulgariser les procédures IT pour le RUN ;</task>
+            <task>Tu rédigeras des cahiers de recette IT de non-régression à destination du RUN ; </task>
+            <task>Tu cartographieras les flux et les process IT. </task>
+        </tasks>
+        <contact>jonathan.roussel@leroymerlin.fr</contact>
     </ad>
 </ads>
