@@ -158,7 +158,7 @@ public class ProfilFragment extends Fragment {
 
             TextView textViewTasks = new TextView(getContext());
             textViewTasks.setTextColor(getResources().getColor(R.color.colorTextWhite));
-            textViewTasks.setText("Missions à affectuer ");
+            textViewTasks.setText("Missions à effectuer ");
             textViewTasks.setPadding(0,10,0,0);
             textViewTasks.setTextSize(convertSpToPixel(6));
             textViewTasks.setTypeface(textViewTasks.getTypeface(), Typeface.BOLD);
@@ -173,6 +173,9 @@ public class ProfilFragment extends Fragment {
             }
             linearLayoutAdSecondary.addView(description);
             linearLayoutAdSecondary.setVisibility(View.GONE);
+
+            TextView textViewContact = new TextView(getContext());
+            textViewContact.setText("Contact :\n" + listAds.get(i).getContact());
 
             linearLayoutAdPrincipal.setOnClickListener(new View.OnClickListener() {
                 @Override
