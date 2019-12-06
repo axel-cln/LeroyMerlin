@@ -22,28 +22,34 @@ public class PreferencesManager {
     public static List<Integer> getAllPrefAds(){
         List<Integer> list = new ArrayList<>();
 
-        SharedPreferences settings = contextPref.getSharedPreferences(PREFS_NAME, 0);
-        if (settings.contains("prefAds")){
-            String[] prefAds = settings.getString("prefAds", "").split(",");
-            for (String pref : prefAds){
-                if (!pref.isEmpty()){
-                    list.add(Integer.parseInt(pref));
+        if (contextPref != null){
+            SharedPreferences settings = contextPref.getSharedPreferences(PREFS_NAME, 0);
+            if (settings.contains("prefAds")){
+                String[] prefAds = settings.getString("prefAds", "").split(",");
+                for (String pref : prefAds){
+                    if (!pref.isEmpty()){
+                        list.add(Integer.parseInt(pref));
+                    }
                 }
             }
         }
+
         return list;
     }
 
     public static List<Integer> getAllUninterestingAds(){
         List<Integer> list = new ArrayList<>();
 
-        SharedPreferences settings = contextPref.getSharedPreferences(PREFS_NAME, 0);
-        if (settings.contains("uninAds")){
-            String[] uninAds = settings.getString("uninAds", "").split(",");
-            for (String unin : uninAds){
-                list.add(Integer.parseInt(unin));
+        if (contextPref != null){
+            SharedPreferences settings = contextPref.getSharedPreferences(PREFS_NAME, 0);
+            if (settings.contains("uninAds")){
+                String[] uninAds = settings.getString("uninAds", "").split(",");
+                for (String unin : uninAds){
+                    list.add(Integer.parseInt(unin));
+                }
             }
         }
+
         return list;
     }
 

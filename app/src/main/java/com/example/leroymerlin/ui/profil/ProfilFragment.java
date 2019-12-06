@@ -176,6 +176,7 @@ public class ProfilFragment extends Fragment {
 
             TextView textViewContact = new TextView(getContext());
             textViewContact.setText("Contact :\n" + listAds.get(i).getContact());
+            linearLayoutAdSecondary.addView(textViewContact);
 
             linearLayoutAdPrincipal.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -67,6 +67,10 @@ public class MainFragment extends Fragment {
                 ((MainActivity)getActivity()).loadFragment();
             }
         });
+
+        logo.setY(logo.getY()-25);
+        logo.setAlpha(0f);
+        logo.animate().translationY(25).setDuration(900).alpha(1);
         return root;
     }
 
