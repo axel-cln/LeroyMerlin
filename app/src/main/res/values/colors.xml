@@ -8,5 +8,6 @@
     <color name="colorBackgroundPrimary">#ffffff</color>
     <color name="colorBackgroundSecondary">#f7f7f7</color>
     <color name="colorText">#000000</color>
-    <color name="colorTextWhite">#ffffff</color>3
+    <color name="colorTextWhite">#ffffff</color>
+    <color name="colorPrimaryDark2">#64AD1E</color>
 </resources>

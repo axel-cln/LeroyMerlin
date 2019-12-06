@@ -22,6 +22,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.leroymerlin.R;
+import com.example.leroymerlin.models.Ad;
+import com.example.leroymerlin.utils.XMLManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfilFragment extends Fragment {
 
@@ -66,8 +71,12 @@ public class ProfilFragment extends Fragment {
         linearLayoutPrincipal.setOrientation(LinearLayout.VERTICAL);
         scrollViewPrincipal.addView(linearLayoutPrincipal);
 
+        List<Ad> listAds = XMLManager.readFile(getContext(), "ads.xml");
+
         // pour chaque annonce, on crée une "fiche"
-        for (int i = 0 ; i < 5 ; i++) {
+        for (int i = 0 ; i < listAds.size() ; i++) {
+
+
             // Création du scroll view de la fiche
             final ScrollView scrollViewAd = new ScrollView(getContext());
             LinearLayout.LayoutParams scrollViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -83,7 +92,7 @@ public class ProfilFragment extends Fragment {
 
             // On crée le premier linearLayout qui contient les infos principales
             final LinearLayout linearLayoutAdPrincipal = new LinearLayout(getContext());
-            linearLayoutAdPrincipal.setPadding(40,0,40,30);
+            linearLayoutAdPrincipal.setPadding(40,20,40,30);
             linearLayoutAdPrincipal.setOrientation(LinearLayout.VERTICAL);
             linearLayoutAdPrincipal.setBackgroundResource(R.drawable.style_ad_saved_part1);
             linearLayoutScrollViewAd.addView(linearLayoutAdPrincipal);
@@ -92,24 +101,29 @@ public class ProfilFragment extends Fragment {
             RelativeLayout relativeLayoutNameAd = new RelativeLayout(getContext());
             linearLayoutAdPrincipal.addView(relativeLayoutNameAd);
 
-
             // on y ajoute les informations principales
             TextView nameAd = new TextView(getContext());
             //LinearLayout.LayoutParams nameAdParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             //nameAdParams.setMargins();
             nameAd.setTextColor(getResources().getColor(R.color.colorTextWhite));
-            nameAd.setText("Engineer BI - STAGE");
+            nameAd.setText(listAds.get(i).getTitle());
             nameAd.setTextSize(convertSpToPixel(10));
-            Log.i("Engineer BI - STAGE", nameAd.getText().toString());
             relativeLayoutNameAd.addView(nameAd);
 
             ImageView removeAdd = new ImageView(getContext());
             removeAdd.setImageResource(R.drawable.ic_cross_black);
             RelativeLayout.LayoutParams layoutImageRemove = new RelativeLayout.LayoutParams((int)convertDpToPixel(20), (int)convertDpToPixel(20));
+            layoutImageRemove.setMargins(0,20,0,0);
             removeAdd.setLayoutParams(layoutImageRemove);
             layoutImageRemove.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            //layoutImageRemove.setMargins(0,);
             relativeLayoutNameAd.addView(removeAdd);
+
+            removeAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    removeAnnonceSauvegardee(linearLayoutPrincipal, scrollViewAd);
+                }
+            });
 
             TextView textViewMission = new TextView(getContext());
             textViewMission.setTextColor(getResources().getColor(R.color.colorTextWhite));
@@ -120,11 +134,7 @@ public class ProfilFragment extends Fragment {
 
             TextView missionsAd = new TextView(getContext());
             missionsAd.setTextColor(getResources().getColor(R.color.colorTextWhite));
-            missionsAd.setText("Au sein de l’équipe DATA Leroy Merlin, tes missions seront les suivantes\n" +
-                    "Tu travailles au contact des équipes métiers ; \n" +
-                    "Tu proposes des solutions techniques innovantes ; \n" +
-                    "Tu modélises et construis le socle Data ; \n" +
-                    "Tu conçois et construis les solutions de restitutions. ");
+            missionsAd.setText(listAds.get(i).getDescription());
             linearLayoutAdPrincipal.addView(missionsAd);
             final ImageView imageViewMore = new ImageView(getContext());
             LinearLayout.LayoutParams imageViewParams = new LinearLayout.LayoutParams(40, 40);
@@ -138,24 +148,28 @@ public class ProfilFragment extends Fragment {
 
             // On crée le second linearLayout qui contient les infos complémentaires
             final LinearLayout linearLayoutAdSecondary = new LinearLayout(getActivity());
-            linearLayoutAdSecondary.setPadding(25,0,25,0);
+            linearLayoutAdSecondary.setPadding(30,0,30,20);
             linearLayoutAdSecondary.setBackgroundResource(R.drawable.style_ad_saved_part2);
             linearLayoutAdSecondary.setOrientation(LinearLayout.VERTICAL);
             LinearLayout.LayoutParams linearLayoutPart2Params = new LinearLayout.LayoutParams(linearLayoutAdPrincipal.getWidth() - 30, ViewGroup.LayoutParams.MATCH_PARENT);
             linearLayoutAdSecondary.setLayoutParams(linearLayoutPart2Params);
             linearLayoutScrollViewAd.addView(linearLayoutAdSecondary);
+
+            TextView textViewTasks = new TextView(getContext());
+            textViewTasks.setTextColor(getResources().getColor(R.color.colorTextWhite));
+            textViewTasks.setText("Tâches à affectuer ");
+            textViewTasks.setPadding(0,10,0,0);
+            textViewTasks.setTextSize(convertSpToPixel(6));
+            textViewTasks.setTypeface(textViewTasks.getTypeface(), Typeface.BOLD);
+            linearLayoutAdSecondary.addView(textViewTasks);
+
+            // on récupère toutes les tâches que l'on affiche dans le deuxième linearLayout
             final TextView description = new TextView(getContext());
             description.setTextColor(getResources().getColor(R.color.colorTextWhite));
-            description.setText("Voici les technos que vous devrez utiliser :\n" +
-                    "Java\n" +
-                    "C\n" +
-                    "PHP\n" +
-                    "Profil :\n" +
-                    "Issu d'une formation sup\n" +
-                    "appétence forte aux méthodes de prévisions de ventes\n" +
-                    "Tu as des connaissances sur Google Cloud Platform et python ou tu as envie d'apprendre\n" +
-                    "Tu es agile et force de propositions.\n\n" +
-                    "Interessé ? Contactez marine.coisne@gmail.com");
+            List<String> tasks = listAds.get(i).getTasks();
+            for (int j = 0 ; j < tasks.size() ; j++) {
+                description.setText(description.getText() + "\n" + tasks.get(j));
+            }
             linearLayoutAdSecondary.addView(description);
             linearLayoutAdSecondary.setVisibility(View.GONE);
 
@@ -198,6 +212,24 @@ public class ProfilFragment extends Fragment {
                 }
             });
         }
+    }
+
+    private void removeAnnonceSauvegardee(final LinearLayout linearLayout, final ScrollView scrollView) {
+        ((LinearLayout)scrollView.getChildAt(0)).getChildAt(0).setBackgroundResource(R.drawable.style_ad_suppressed);
+        ((LinearLayout)scrollView.getChildAt(0)).getChildAt(1).setBackgroundResource(R.drawable.style_ad_suppressed);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int maxWidth = displayMetrics.widthPixels;
+        int width = (int) scrollView.getX();
+        scrollView.animate().translationX(maxWidth - width).alpha(0).setDuration(600);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                linearLayout.removeView(scrollView);
+            }
+        }, 650);
+
     }
 
     // on affiche les informations supplémentaires à l'utilisateur
