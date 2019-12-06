@@ -1,12 +1,10 @@
 package com.example.leroymerlin.ui.profil;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,9 +21,10 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.leroymerlin.R;
 import com.example.leroymerlin.models.Ad;
+import com.example.leroymerlin.utils.PreferencesManager;
 import com.example.leroymerlin.utils.XMLManager;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ProfilFragment extends Fragment {
@@ -42,17 +41,9 @@ public class ProfilFragment extends Fragment {
         notificationsViewModel =
                 ViewModelProviders.of(this).get(ProfilViewModel.class);
         View root = inflater.inflate(R.layout.fragment_profil, container, false);
-        /*final TextView textView = root.findViewById(R.id.text_notifications);
-        notificationsViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
 
         layoutProfil = root.findViewById(R.id.layoutProfil);
         layoutProfil.setGravity(Gravity.CENTER_HORIZONTAL);
-        //Log.i("Test" , layoutProfil.toString());
 
         creationLayout();
 
@@ -61,8 +52,6 @@ public class ProfilFragment extends Fragment {
 
     @SuppressLint("ResourceAsColor")
     public void creationLayout() {
-        Log.i("Test" , layoutProfil.toString());
-
         // Création d'un scrollView principal qui va contenir toutes les annonces
         ScrollView scrollViewPrincipal = new ScrollView(getContext());
 
@@ -71,12 +60,21 @@ public class ProfilFragment extends Fragment {
         linearLayoutPrincipal.setOrientation(LinearLayout.VERTICAL);
         scrollViewPrincipal.addView(linearLayoutPrincipal);
 
-        List<Ad> listAds = XMLManager.readFile(getContext(), "ads.xml");
+        final List<Ad> listAds = XMLManager.readFile(getContext(), "ads.xml");
+
+        //On garde que les offres aimées
+        Iterator<Ad> it = listAds.iterator();
+
+        while (it.hasNext()){
+            Ad ad = it.next();
+            //On supprime les offres non lues ou évitées
+            if (!PreferencesManager.getAllPrefAds().contains(ad.getId())){
+                it.remove();
+            }
+        }
 
         // pour chaque annonce, on crée une "fiche"
         for (int i = 0 ; i < listAds.size() ; i++) {
-
-
             // Création du scroll view de la fiche
             final ScrollView scrollViewAd = new ScrollView(getContext());
             LinearLayout.LayoutParams scrollViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -118,10 +116,12 @@ public class ProfilFragment extends Fragment {
             layoutImageRemove.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             relativeLayoutNameAd.addView(removeAdd);
 
+            final int finalI = i;
             removeAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     removeAnnonceSauvegardee(linearLayoutPrincipal, scrollViewAd);
+                    PreferencesManager.removePrefAd(listAds.get(finalI).getId());
                 }
             });
 
@@ -247,7 +247,6 @@ public class ProfilFragment extends Fragment {
             @Override
             public void run() {
                 int maxSizeInformations = linearLayoutS.getHeight();
-                Log.i("Taille MAXIMALE", "" + maxSizeInformations);
                 //LinearLayout.LayoutParams scrollViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
                 //linearLayoutAdSecondary.setLayoutParams(scrollViewParams);
                 for (int i = 0; i < maxSizeInformations; i++) {
@@ -256,7 +255,6 @@ public class ProfilFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            //Log.i("Taille", finalI +"");
                             LinearLayout.LayoutParams scrollViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, linearHeight + finalI);
                             scrollViewParams.setMargins(0, 30, 0, 0);
                             scrollView.setLayoutParams(scrollViewParams);
@@ -278,12 +276,8 @@ public class ProfilFragment extends Fragment {
     // on masque les informations supplémentaires à l'utilisateur
     private void closeLinearInformations(final ScrollView scrollView, final LinearLayout linearLayout, ImageView imageView) {
         final int linearHeight = scrollView.getHeight();
-        Log.i("Test taille linear", linearHeight +"");
 
         final int maxSizeInformations = linearLayout.getHeight();
-        Log.i("Taille MAXIMALE", "" + maxSizeInformations);
-        //LinearLayout.LayoutParams scrollViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
-        //linearLayoutAdSecondary.setLayoutParams(scrollViewParams);
         for (int i = maxSizeInformations; i > 0 ; i--) {
             Handler handler = new Handler();
             final int finalI = i;

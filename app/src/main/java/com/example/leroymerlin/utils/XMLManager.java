@@ -60,6 +60,7 @@ public class XMLManager {
 
                 String title = ad.getElementsByTagName("title").item(0).getTextContent();
                 String description = ad.getElementsByTagName("description").item(0).getTextContent();
+                String contact = ad.getElementsByTagName("contact").item(0).getTextContent();
 
                 advert.setTitle(title);
                 advert.setDescription(description);

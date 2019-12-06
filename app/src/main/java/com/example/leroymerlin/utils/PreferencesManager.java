@@ -50,9 +50,6 @@ public class PreferencesManager {
         }
         stringBuilder.append(pid);
 
-        Log.e("String", "builder");
-        Log.e("On push : ", stringBuilder.toString());
-
         SharedPreferences settings = contextPref.getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("prefAds", stringBuilder.toString());
@@ -73,4 +70,18 @@ public class PreferencesManager {
         editor.apply();
     }
 
+    public static void removePrefAd(int pid){
+        List<Integer> list = getAllPrefAds();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Integer id : list){
+            if (id != pid){
+                stringBuilder.append(id+",");
+            }
+        }
+
+        SharedPreferences settings = contextPref.getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("prefAds", stringBuilder.toString());
+        editor.apply();
+    }
 }
